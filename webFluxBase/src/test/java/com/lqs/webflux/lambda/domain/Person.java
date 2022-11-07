@@ -1,5 +1,8 @@
 package com.lqs.webflux.lambda.domain;
 
+import lombok.Data;
+
+@Data
 public class Person {
 
     private String userName;
