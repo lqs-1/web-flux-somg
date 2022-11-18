@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+    /**
+     * 监听默认事件
+     * @type {EventSource}
+     */
+
+    // 创建EventSource对象
+    var eventSource1 = new EventSource("sse/def");
+    // 当服务端发送的事件到达后触发这个方法执行
+    eventSource1.onmessage = function(eve){
+        console.log("my-msg", eve.data, eve)
+
+        // 默认一直循环重连，手动终止
+        if (eve.data == 9){
+            eventSource1.close()
+        }
+
+    }
+
+
+    /**
+     * 监听自定义事件
+     * @type {EventSource}
+     */
+
+    // 创建EventSource对象
+    var eventSource2 = new EventSource("sse/custom");
+    // 当服务端发送的事件到达后触发这个方法执行
+    eventSource2.addEventListener("china", function (event) {
+        console.log("my-msg:" + event.data, event)
+        // 默认一直循环重连，手动终止
+        if (event.data == 9){
+            eventSource2.close()
+        }
+    })
+
+</script>
+
+</body>
+</html>
